@@ -1,8 +1,17 @@
 #! /usr/bin/env python3
 
+import argparse
+
+parser = argparse.ArgumentParser(description = "Calculates the GC content of features in a genome")
+
+#Add positional arguments for the required files
+parser.add_argument( "gff_file", help="the gff file containing the annotations for the genome of interest" )
+parser.add_argument( "fsa_file", help="the fsa file containing the sequenced genome" )
+
 # specify the input files
-gff_file   = 'watermelon.gff'
-fasta_file = 'watermelon.fsa'
+args = parser.parse_args()
+gff_file   = args.gff_file
+fasta_file = args.fsa_file
 
 
 # open the FASTA file
