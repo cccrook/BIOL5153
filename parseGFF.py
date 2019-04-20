@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 
 import argparse
+from Bio import SeqIO
 
 parser = argparse.ArgumentParser(description = "Calculates the GC content of features in a genome")
 
@@ -18,7 +19,8 @@ fasta_file = args.fsa_file
 fasta = open(fasta_file)
 
 # the variable 'genome' holds the genome sequence
-genome = fasta.read()
+genome = next(fasta)
+genome = SeqIO.read(fasta)
 
 #close the fasta file
 fasta.close()
