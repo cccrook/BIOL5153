@@ -3,6 +3,8 @@
 import argparse
 from Bio import SeqIO
 
+def get_args():
+#create an argument parser object
 parser = argparse.ArgumentParser(description = "Calculates the GC content of features in a genome")
 
 #Add positional arguments for the required files
@@ -14,25 +16,25 @@ args = parser.parse_args()
 gff_file   = args.gff_file
 fasta_file = args.fsa_file
 
+def read_fasta():
+	# open the FASTA file
+	fasta = open(fasta_file)
 
-# open the FASTA file
-fasta = open(fasta_file)
+	# the variable 'genome' holds the genome sequence
+	genome = next(fasta)
+	genome = SeqIO.read(fasta)
 
-# the variable 'genome' holds the genome sequence
-genome = next(fasta)
-genome = SeqIO.read(fasta)
+	#close the fasta file
+	fasta.close()
 
-#close the fasta file
-fasta.close()
-
-# open the GFF file
-gff = open(gff_file, 'r')
+def read_gff():
+	# open the GFF file
+	gff = open(gff_file, 'r')
 
 # read GFF file, line by line
 for line in gff:
 	line = line.rstrip('\n')
-	#print(line)
-	
+	#print(line)	
 	# split each line on the tab character
 	#sequence, source, feature, begin, end, length, strand, phase, attributes = line.split('\t')
 	fields = line.split('\t')
@@ -41,6 +43,8 @@ for line in gff:
 	stop = int(fields[4])
 	#math = stop - start
 	#print(math)
+	
+def get_gc():
 	for feat_seq in genome:
 			feat_seq = genome[start:stop]
 			#print(feat_seq)
